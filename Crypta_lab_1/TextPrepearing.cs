@@ -18,14 +18,13 @@ namespace Crypta_lab_1
         //using for Russian language;
         public static string Remove_Nonlaters1(string text) 
         {
-
             text = text.Replace("ё", "е").Replace("'",string.Empty);
             Regex.Replace(text, @"[^\x20-\x7F]", "");
             Regex BadChars = new Regex("[^а-я']");
             return BadChars.Replace(text, string.Empty);
         }
 
-        //using fo English language;
+        //using for English language;
         public static string Remove_Nonlaters2(string text) 
         {
             text = text.Replace("'", string.Empty);
@@ -33,10 +32,6 @@ namespace Crypta_lab_1
             Regex BadChars_with_spaces = new Regex("[^a-z']"); //
             return BadChars_with_spaces.Replace(text, string.Empty);
         }
-
-
-            
+        
     }
-
-                
 }

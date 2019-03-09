@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Bigrams.cs" />
     <Compile Include="Calculating.cs" />
-    <Compile Include="Monograms.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextPrepearing.cs" />

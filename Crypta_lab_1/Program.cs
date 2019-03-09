@@ -22,40 +22,12 @@ namespace Crypta_lab_1
             //Console.WriteLine($"{TextPrepearing.Remove_Nonlaters2(TextPrepearing.ParseText(@"C: \Users\temat\Desktop\Crypta\ff.txt"))}");
 
             watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
+            var elapsedMs = (double)watch.ElapsedMilliseconds;
 
-            Console.WriteLine($"\n\nEXECUTION TIME: {elapsedMs}");
+            Console.WriteLine($"\n\nEXECUTION TIME: {elapsedMs/1000} s");
 
             Console.WriteLine($"\n\nPress any key to exit.");
             Console.ReadKey();
         }
     }
 }
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//static double Sum(double[] frequency)
-        //{
-        //    double sum = 0;
-        //    for (int q = 0; q < frequency.Length; q++)
-        //        sum += frequency[q];
-
-        //    return sum;
-        //}
