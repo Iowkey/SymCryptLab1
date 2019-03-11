@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 
 namespace Crypta_lab_1
@@ -11,20 +12,21 @@ namespace Crypta_lab_1
     {        
         static void Main(string[] args)
         {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
+            var watch = Stopwatch.StartNew();
+            var path = @"C:\Users\temat\Desktop\Crypta\ff.txt";
 
-            //_Collections.Displaying()
-            //_Collections.Displaying(Calculating.MonogarmsVal(@"C: \Users\temat\Desktop\Crypta\ff.txt", "English"));
-            _Collections.Displaying(Calculating.BigramVal(@"C: \Users\temat\Desktop\Crypta\ff.txt", "English"));
-            //_Collections.Displaying(_Collections.Alphabet("English"));
-            //_Collections.Displaying(_Collections.Bigrams("English"));
+            //var H1 = Calculating.Entropy(Calculating.MonogarmsFrequency(path,false));
+            //var H2 = Calculating.Entropy(Calculating.BigramFrequancy(path,false,true));
+            //Console.WriteLine($"H1 = {H1}\nH2 = {H2}");
 
-            //Console.WriteLine($"{TextPrepearing.Remove_Nonlaters2(TextPrepearing.ParseText(@"C: \Users\temat\Desktop\Crypta\ff.txt"))}");
+            //Calculating.Check(Calculating.MonogarmsFrequency(path, true));
+            //Calculating.Check(Calculating.BigramFrequancy(path, true, true));
+            Console.WriteLine(TextPrepearing.Remove_Nonlaters(TextPrepearing.Parse(path),true));
 
             watch.Stop();
-            var elapsedMs = (double)watch.ElapsedMilliseconds;
-
-            Console.WriteLine($"\n\nEXECUTION TIME: {elapsedMs/1000} s");
+            var elapsedMs = (double) watch.ElapsedMilliseconds;
+            double sec = elapsedMs / 1000;
+            Console.WriteLine($"\n\nEXECUTION TIME: {Math.Round(sec,2)} s");
 
             Console.WriteLine($"\n\nPress any key to exit.");
             Console.ReadKey();

@@ -9,29 +9,45 @@ namespace Crypta_lab_1
 {
     public class TextPrepearing
     {
-        public static string ParseText(string path)
-        {
-            var text = System.IO.File.ReadAllText(path, Encoding.Default);
-            return text.ToLower();
-        }
 
-        //using for Russian language;
-        public static string Remove_Nonlaters1(string text) 
+        public static string Parse(string path)
+        {
+            return System.IO.File.ReadAllText(path, Encoding.Default);
+        }
+       
+        public static string Remove_Nonlaters(string text, out int space_count) 
         {
             text = text.Replace("ё", "е").Replace("'",string.Empty);
-            Regex.Replace(text, @"[^\x20-\x7F]", "");
-            Regex BadChars = new Regex("[^а-я']");
-            return BadChars.Replace(text, string.Empty);
+
+            Regex BadChars = new Regex("[^а-я ]");
+            space_count = BadChars.Replace(text, "").Length;
+            text = text.Replace(" ", "");
+
+            return BadChars.Replace(text, "").ToLower(); 
         }
 
-        //using for English language;
-        public static string Remove_Nonlaters2(string text) 
+        public static string Remove_Nonlaters(string dirty_text, out int space_count,string trash)
         {
-            text = text.Replace("'", string.Empty);
-            Regex.Replace(text, @"[^\x20-\x7F]", "");
-            Regex BadChars_with_spaces = new Regex("[^a-z']"); //
-            return BadChars_with_spaces.Replace(text, string.Empty);
+            var temp = dirty_text.Replace("ё", "е");
+            //space_count = BadChars.Replace(text, "").Length;
+            temp = Regex.Replace(temp, @"\s+", " ");
+            temp = temp.Replace(" ", "_");
+            var clean = Regex.Replace(temp, "[^а-я_]", "");
+            space_count = clean.Length;
+            var final = Regex.Replace(clean, "[^а-я]", "");
+
+            return clean.ToLower();
         }
-        
+
+        public static string Remove_Nonlaters(string dirty_text,bool space)
+        {
+            var temp = dirty_text.Replace("ё", "е").Replace(" ", "_").ToLower();
+
+            if (space) return Regex.Replace(temp, "[^а-я_]", "");
+            else return Regex.Replace(temp, "[^а-я]", "");
+        }
     }
 }
+
+
+
