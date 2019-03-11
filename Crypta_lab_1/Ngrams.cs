@@ -28,23 +28,21 @@ namespace Crypta_lab_1
                 Console.WriteLine($"{val.Key} = {Math.Round(val.Value, 4)} ");
         }
 
-        public static List<char> Alphabet(bool space)
+        public static List<char> Alphabet()
         {
             var lst = new List<char>();
 
             for (int i = 1072; i <= 1103; i++)
                 lst.Add(Convert.ToChar(i));
-
-            if (space)
-                lst.Add('_');
-            
+            lst.Add('_');
+            lst.Remove('ъ');
             return lst;
         }
 
-        public static List<string> AllBigrams(bool space)
+        public static List<string> AllBigrams()
         {
-            List<char> alphabet = Alphabet(space);
-            var allbigrams = new List<string>(alphabet.Count * alphabet.Count);
+            List<char> alphabet = Alphabet();
+            var allbigrams = new List<string>();
 
             for (int i = 0; i < alphabet.Count; i++)
                 for (int j = 0; j < alphabet.Count; j++)

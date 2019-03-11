@@ -53,12 +53,9 @@ namespace Crypta_lab_1
 
         public static Dictionary<char, double> MonogarmsFrequency(string path,bool spaces)
         {
-            int SpaceCount;
-            var cleartext = TextPrepearing.Remove_Nonlaters(TextPrepearing.Parse(path), out SpaceCount,"");
-            //
-            Console.WriteLine($"/nSpaceCout = {SpaceCount} ClearText = {cleartext.Length}");
-            //
-            var alphabet = Ngrams.Alphabet(spaces);
+            var cleartext = TextPrepearing.Remove_Nonlaters(TextPrepearing.Parse(path), spaces);
+            
+            var alphabet = Ngrams.Alphabet();
             var monograms = new Dictionary<char, double>();
 
             foreach (char c in alphabet)
@@ -67,7 +64,7 @@ namespace Crypta_lab_1
             foreach (char x in cleartext)
                 monograms[x]++;
             
-            var final_lenght = spaces ? SpaceCount : cleartext.Length;
+            var final_lenght = cleartext.Length;
             monograms = monograms.ToDictionary(kvp => kvp.Key, kvp => kvp.Value / final_lenght);
 
             return monograms.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value); ;
@@ -75,10 +72,9 @@ namespace Crypta_lab_1
 
         public static Dictionary<string,double> BigramFrequancy(string path,bool touchable,bool spaces) 
         {
-            int SpaceCount;
-            var cleartext = TextPrepearing.Remove_Nonlaters(TextPrepearing.Parse(path), out SpaceCount);
+            var cleartext = TextPrepearing.Remove_Nonlaters(TextPrepearing.Parse(path), spaces);
 
-            var allbigrams = Ngrams.AllBigrams(spaces);
+            var allbigrams = Ngrams.AllBigrams();
             var bigrams = new Dictionary<string, double>();
 
             foreach (string x in allbigrams)
@@ -90,8 +86,12 @@ namespace Crypta_lab_1
             else
                 for (int i = 0; i < cleartext.Length - 1; i += 2)
                     bigrams[$"{cleartext[i]}" + $"{cleartext[i + 1]}"]++;
-         
-            var final_lenght = spaces ? SpaceCount : cleartext.Length;
+            int final_lenght;
+            if (touchable)
+                final_lenght = cleartext.Length - 1;
+            else
+                final_lenght = cleartext.Length / 2;
+
             bigrams = bigrams.ToDictionary(kvp => kvp.Key, kvp => kvp.Value / final_lenght);
 
             return bigrams.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value); ;
